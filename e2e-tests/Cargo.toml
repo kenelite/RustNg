@@ -1,0 +1,12 @@
+[package]
+name = "rustng-e2e-tests"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "rustng_e2e_tests"
+path = "src/lib.rs"
+
+[dev-dependencies]
+rustng-core = { path = "../core" }
+

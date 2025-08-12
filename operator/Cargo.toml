@@ -1,0 +1,11 @@
+[package]
+name = "rustng-operator"
+version = "0.1.0"
+edition = "2021"
+
+[[bin]]
+name = "rustng-operator"
+path = "src/main.rs"
+
+[dependencies]
+

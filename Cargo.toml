@@ -1,0 +1,17 @@
+[workspace]
+resolver = "2"
+members = [
+  "core",
+  "transport",
+  "http",
+  "control",
+  "config",
+  "sd",
+  "admin",
+  "cli",
+  "plugins",
+  "examples",
+  "operator",
+  "e2e-tests",
+]
+

@@ -1,0 +1,13 @@
+[package]
+name = "rustng-sd"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "rustng_sd"
+path = "src/lib.rs"
+
+[dependencies]
+rustng-core = { path = "../core" }
+rustng-config = { path = "../config" }
+
