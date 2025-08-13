@@ -10,3 +10,14 @@ impl AdminApi {
     }
 }
 
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn health_is_ok() {
+        let api = AdminApi::new();
+        assert_eq!(api.health(), "ok");
+    }
+}
+

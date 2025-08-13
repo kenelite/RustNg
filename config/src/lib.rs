@@ -38,3 +38,35 @@ impl ConfigManager {
     }
 }
 
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use std::sync::{Arc, Mutex};
+
+    struct CapturingSub(Arc<Mutex<Vec<String>>>);
+    impl ConfigSubscriber for CapturingSub {
+        fn on_event(&self, event: &ConfigEvent) {
+            let s = match event {
+                ConfigEvent::RouteAdded { route } => format!("add:{route}"),
+                ConfigEvent::RouteRemoved { route } => format!("del:{route}"),
+                ConfigEvent::UpstreamUpdated { upstream } => format!("up:{id}", id = upstream.id),
+                ConfigEvent::PluginReload => "plugin".into(),
+            };
+            self.0.lock().unwrap().push(s);
+        }
+    }
+
+    #[test]
+    fn events_are_delivered_to_subscribers() {
+        let sink = Arc::new(Mutex::new(vec![]));
+        let mut mgr = ConfigManager::new();
+        mgr.subscribe(Box::new(CapturingSub(sink.clone())));
+
+        mgr.emit(ConfigEvent::RouteAdded { route: "/a".into() });
+        mgr.emit(ConfigEvent::PluginReload);
+
+        let got = sink.lock().unwrap().clone();
+        assert_eq!(got, vec!["add:/a".to_string(), "plugin".to_string()]);
+    }
+}
+
