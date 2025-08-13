@@ -1,0 +1,13 @@
+[package]
+name = "rustng-examples"
+version = "0.1.0"
+edition = "2021"
+
+[[bin]]
+name = "rustng-examples"
+path = "src/main.rs"
+
+[dependencies]
+rustng-core = { path = "../core" }
+rustng-http = { path = "../http" }
+
