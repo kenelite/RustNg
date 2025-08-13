@@ -10,3 +10,14 @@ impl ControlPlane for NoopControlPlane {
     }
 }
 
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn noop_apply_config_ok() {
+        let cp = NoopControlPlane;
+        assert!(cp.apply_config(b"{}").is_ok());
+    }
+}
+

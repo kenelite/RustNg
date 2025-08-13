@@ -16,3 +16,14 @@ impl ServiceDiscovery for NoopSd {
     fn start(&self) {}
 }
 
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn noop_sd_start_should_not_panic() {
+        let sd = NoopSd;
+        sd.start();
+    }
+}
+
